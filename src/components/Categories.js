@@ -7,23 +7,23 @@ export class Categories extends Component {
             categories:[
                 {
                     key: 'all',
-                    name: 'Всё'
+                    name: 'All'
                 },
                 {
                     key: 'chairs',
-                    name: 'Стулья'
+                    name: 'Chairs'
                 },
                 {
                     key: 'tables',
-                    name: 'Столы'
+                    name: 'Tables'
                 },
                 {
                     key: 'sofa',
-                    name: 'Диваны'
+                    name: 'Sofas'
                 },
                 {
                     key: 'light',
-                    name: 'Свет'
+                    name: 'Lighting'
                 },
             ]
         }

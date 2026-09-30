@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaShoppingCart } from "react-icons/fa";
 import { useHistory } from 'react-router-dom';
-import { checkUserLoginStatus } from './utils';
+import { api } from '../api';
 import Order from './Order';
 import AuthWindow from './AuthWindow';
 import UserProfile from './UserProfile';
@@ -10,25 +10,26 @@ const Header = (props) => {
   const [cartOpen, setCartOpen] = useState(false);
   const [showAuthWindow, setShowAuthWindow] = useState(false);
   const [showUserProfile, setShowUserProfile] = useState(false);
+  const [user, setUser] = useState(null);
   const history = useHistory();
+  useEffect(() => { api('/me').then(setUser).catch(() => setUser(null)); }, []);
   
   const toggleAuthWindow = () => {
     setShowAuthWindow(!showAuthWindow);
     if (!showAuthWindow) {
-      setShowUserProfile(false); // Если окно аутентификации открывается, закрываем окно профиля
+      setShowUserProfile(false);
     }
   };
 
   const toggleUserProfile = () => {
     setShowUserProfile(!showUserProfile);
     if (!showUserProfile) {
-      setShowAuthWindow(false); // Если окно профиля открывается, закрываем окно аутентификации
+      setShowAuthWindow(false);
     }
   };
 
   const handleCheckout = () => {
-    const isLoggedIn = checkUserLoginStatus();
-    if (isLoggedIn) {
+    if (user) {
       props.onCheckout();
     } else {
       toggleAuthWindow();
@@ -48,11 +49,11 @@ const Header = (props) => {
             quantity={order.quantity}
           />
         ))}
-        <p className='summa'>Сумма: {new Intl.NumberFormat().format(summa)} ₽</p>
-        {checkUserLoginStatus() ? (
-          <button className='checkout-button' onClick={handleCheckout}>Перейти к оформлению</button>
+        <p className='summa'>Total: {new Intl.NumberFormat('en-US').format(summa)} RUB</p>
+        {user ? (
+          <button className='checkout-button' onClick={handleCheckout}>Checkout</button>
         ) : (
-          <p>Для оформления заказа сначала авторизуйтесь</p>
+          <p>Sign in to place an order</p>
         )}
       </div>
     );
@@ -61,7 +62,7 @@ const Header = (props) => {
   const showNothing = () => {
     return (
       <div className='empty'>
-        <h2>Товаров нет</h2>
+        <h2>Your cart is empty</h2>
       </div>
     );
   };
@@ -73,7 +74,7 @@ const Header = (props) => {
   return (
     <header className='header-container'>
       <div className="header-top">
-        <span className='logo'>Гармония стиля</span>
+        <span className='logo'>Style Harmony</span>
         <div className="nav-container">
           <FaShoppingCart 
             onClick={() => setCartOpen(!cartOpen)} 
@@ -81,8 +82,8 @@ const Header = (props) => {
             style={{ color: cartOpen ? '#c9302c' : '#fff' }} 
           />
           <ul className='nav'>
-            <li onClick={goToAboutPage}>Про нас</li>
-            <li onClick={() => checkUserLoginStatus() ? toggleUserProfile() : toggleAuthWindow()}>Кабинет</li>
+            <li onClick={goToAboutPage}>About</li>
+            <li onClick={() => user ? toggleUserProfile() : toggleAuthWindow()}>Account</li>
           </ul>
         </div>
       </div>
@@ -97,9 +98,9 @@ const Header = (props) => {
         </div>
       )}
 
-      {showAuthWindow && <AuthWindow />}
+      {showAuthWindow && <AuthWindow onSuccess={() => { api('/me').then(setUser); setShowAuthWindow(false); }} />}
       
-      {showUserProfile && <UserProfile onClose={toggleUserProfile} />}
+      {showUserProfile && user && <UserProfile email={user.email} onLogout={() => { setUser(null); setShowUserProfile(false); }} />}
     </header>
   );
 };

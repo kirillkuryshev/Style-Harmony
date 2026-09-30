@@ -1,0 +1,50 @@
+{
+  "item1": {
+    "category": "chairs",
+    "descr": "A minimalist chair that brings comfort and a clean look to any room.",
+    "id": 1,
+    "img": "chair-grey.jpeg",
+    "price": 3500,
+    "title": "Gray chair"
+  },
+  "item2": {
+    "category": "tables",
+    "descr": "A natural wood table with a simple design and a warm finish.",
+    "id": 2,
+    "img": "table.webp",
+    "price": 3000,
+    "title": "Wooden table"
+  },
+  "item3": {
+    "category": "sofa",
+    "descr": "A comfortable sofa for a living room, bedroom, or office.",
+    "id": 3,
+    "img": "sofa.jpeg",
+    "price": 7000,
+    "title": "Sofa"
+  },
+  "item4": {
+    "category": "light",
+    "descr": "A practical wall light that adds warmth and character to your space.",
+    "id": 4,
+    "img": "wall-light.jpeg",
+    "price": 4000,
+    "title": "Wall light"
+  },
+  "item5": {
+    "category": "chairs",
+    "descr": "A light, versatile chair with a clean white finish.",
+    "id": 5,
+    "img": "chair-white.jpeg",
+    "price": 2000,
+    "title": "White chair"
+  },
+  "item6": {
+    "category": "sofa",
+    "descr": "A roomy gray sofa with space for family and friends.",
+    "id": 6,
+    "img": "sofa2.jpg",
+    "price": 12000,
+    "title": "Gray sofa"
+  }
+}

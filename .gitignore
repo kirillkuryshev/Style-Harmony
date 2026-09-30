@@ -1,0 +1,6 @@
+node_modules/
+build/
+backend/data/*.db
+backend/data/*.db-*
+.env
+.npm-cache/

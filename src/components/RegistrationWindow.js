@@ -1,79 +1,28 @@
 import React, { useState } from 'react';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { api } from '../api';
 
-const RegistrationWindow = ({ onClose, onBack }) => {
-  const [login, setLogin] = useState('');
+export default function RegistrationWindow({ onBack, onSuccess }) {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [authMessage, setAuthMessage] = useState('');
-  const [authStatus, setAuthStatus] = useState('');
+  const [error, setError] = useState('');
 
-  const db = getFirestore();
-
-  const handleRegistration = async () => {
+  const register = async () => {
     try {
-      // Проверка корректности введенной почты
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(login)) {
-        setAuthMessage('Некорректный формат почты');
-        setAuthStatus('error');
-        return;
-      }
-
-      const userDoc = await getDoc(doc(db, 'users', login));
-      if (userDoc.exists()) {
-        setAuthMessage('Почта уже используется');
-        setAuthStatus('error');
-        return;
-      }
-
-      const userRef = doc(db, 'users', login);
-      await setDoc(userRef, { password });
-
-      onClose();
-
-      setAuthMessage('Регистрация завершена');
-      setAuthStatus('success');
-    } catch (error) {
-      console.error('Ошибка при регистрации:', error);
-      setAuthMessage('Ошибка при регистрации');
-      setAuthStatus('error');
+      await api('/auth/register', { method: 'POST', body: JSON.stringify({ email, password }) });
+      onSuccess();
+    } catch (e) {
+      setError(e.message);
     }
   };
 
   return (
     <div className="auth-window shop-cart">
-      <h2>Регистрация</h2>
-      <div className="auth-input">
-        <label style={{ fontWeight: 'bold', color: '#333' }}>Почта</label>
-        <input
-          type="text"
-          placeholder="Введите почту"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
-          style={{ borderRadius: '5px', padding: '5px', marginTop: '5px' }}
-        />
-      </div>
-      <div className="auth-input">
-        <label style={{ fontWeight: 'bold', color: '#333' }}>Пароль</label>
-        <input
-          type="password"
-          placeholder="Введите пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ borderRadius: '5px', padding: '5px', marginTop: '5px' }}
-        />
-      </div>
-      <br />
-      <p style={{ color: authStatus === 'error' ? 'red' : 'transparent', marginTop: '5px', marginBottom: '10px' }}>{authMessage}</p>
-      <button onClick={handleRegistration} className="registration-registration-button">
-        Зарегистрироваться
-      </button>
-      <button onClick={onBack} className="registration-login-button">
-        Назад
-      </button>
-      <p style={{ color: authStatus === 'success' ? 'green' : 'transparent', marginTop: '5px' }}>{authMessage}</p>
+      <h2>Create an account</h2>
+      <div className="auth-input"><label>Email</label><input type="email" value={email} onChange={e => setEmail(e.target.value)} /></div>
+      <div className="auth-input"><label>Password (at least 8 characters)</label><input type="password" value={password} onChange={e => setPassword(e.target.value)} /></div>
+      {error && <p role="alert">{error}</p>}
+      <button className="registration-registration-button" onClick={register}>Create account</button>
+      <button className="registration-login-button" onClick={onBack}>Back</button>
     </div>
   );
 }
-
-export default RegistrationWindow;

@@ -14,11 +14,11 @@ body {
 
 .wrapper {
     width: 1280px;
-    margin: 50px auto;    
+    margin: 50px auto;
 }
 
 
-/*Header*/
+
 
 header {
   position: relative;
@@ -27,29 +27,29 @@ header {
 
 .header-top {
   width: 100%;
-  background-color: #333; /* Серый цвет полоски */
-  padding: 10px 20px; /* Отступы для полоски */
+  background-color: #333;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Распределение элементов */
-  position: fixed; /* Фиксированное положение */
-  top: 0; /* Расположение сверху */
-  z-index: 1000; /* Чтобы полоска была поверх других элементов */
-  left: 0; /* Растягивание на весь экран */
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  left: 0;
 }
 
 .header-top .logo {
   font-weight: 600;
   font-size: 20px;
-  color: #fff; /* Белый цвет текста для логотипа */
+  color: #fff;
 }
 
 .header-top .nav-container {
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Выровнять элементы справа */
-  flex-grow: 1; /* Растягивание контейнера для кнопок */
-  margin-right: 15px; /* Немного сдвигаем влево */
+  justify-content: flex-end;
+  flex-grow: 1;
+  margin-right: 15px;
 }
 
 .header-top ul.nav {
@@ -61,30 +61,30 @@ header {
 }
 
 .header-top ul.nav li {
-  margin-left: 20px; /* Уменьшение отступов */
+  margin-left: 20px;
   cursor: pointer;
   transition: color 500ms ease;
-  color: #fff; /* Белый цвет текста для навигационных элементов */
+  color: #fff;
 }
 
 .header-top ul.nav li:hover {
-  color: #ccc; /* Серый цвет текста при наведении */
+  color: #ccc;
 }
 
 .header-top .shop-cart-button {
   cursor: pointer;
   transition: color, transform 500ms ease;
-  color: #ffffff; /* Белый цвет для кнопки корзины */
-  margin-right: 8px; /* Уменьшение отступа справа для кнопки корзины */
+  color: #ffffff;
+  margin-right: 8px;
 
 }
 
 .header-top .shop-cart-button.active {
-  color: red; /* Красный цвет для активной кнопки корзины */
+  color: red;
 }
 
 header .presentation {
-  margin-top: 30px; /* Отступ после серой полоски */
+  margin-top: 30px;
   background: url('./img/bg.jpeg') no-repeat;
   width: 100%;
   height: 500px;
@@ -97,7 +97,7 @@ header .presentation {
 }
 
 header .presentation::after {
-  content: 'Лучшие товары для вашего дома';
+  content: 'Beautiful pieces for your home';
   position: absolute;
   top: 100px;
   left: 50px;
@@ -108,7 +108,7 @@ header .presentation::after {
 }
 
 header .presentation::before {
-  content: 'по низким ценам';
+  content: 'at everyday prices';
   position: absolute;
   top: 250px;
   left: 50px;
@@ -118,7 +118,7 @@ header .presentation::before {
   color: #fff;
 }
 
-/*Shopcart*/
+
 header .shop-cart-button:hover,
 header .shop-cart-button:active {
     color: #dc3d3d;
@@ -139,8 +139,8 @@ header .shop-cart {
     padding: 20px;
 
 
-    max-height: 70vh; /* Максимальная высота корзины */
-  overflow-y: auto; /* Включаем вертикальную прокрутку */
+    max-height: 70vh;
+  overflow-y: auto;
   box-sizing: border-box;
 
 }
@@ -199,7 +199,7 @@ header .shop-cart .summa {
 
 
 
-/*Header*/
+
 
 .categories div {
     display: inline-block;
@@ -255,7 +255,7 @@ main .item{
     padding-bottom: 20px;
 }
 
-main .item img, 
+main .item img,
 .full-item img {
     width: 100%;
     border-radius: 10px 10px 0 0;
@@ -268,7 +268,7 @@ main .item img:hover, .full-item img:hover {
 }
 
 main h2, .full-item h2,
-main p, .full-item p, 
+main p, .full-item p,
 main b, .full-item b {
     margin: 10px 20px;
     color: #333;
@@ -307,15 +307,15 @@ footer {
 }
 
 .shop-cart {
-    border: 2px solid #333; /* Темно-серая рамка */
+    border: 2px solid #333;
     border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px; /* Закругленные углы */
-    padding: 10px; /* Добавление отступа внутри окна корзины */
-    background-color: white; /* Цвет фона */
+    border-bottom-right-radius: 15px;
+    padding: 10px;
+    background-color: white;
   }
 
-  
-/*Auth*/
+
+
 
 
 
@@ -326,7 +326,7 @@ footer {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* добавляем анимацию перехода */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .auth-login-button:hover {
@@ -334,13 +334,13 @@ footer {
 }
 
 .auth-registration-button {
-  background-color: #d9534f; 
+  background-color: #d9534f;
   color: #fff;
   padding: 8px 15px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* добавляем анимацию перехода */
+  transition: background-color 0.3s, color 0.3s;
   margin-bottom: 5px;
 }
 
@@ -357,7 +357,7 @@ footer {
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* добавляем анимацию перехода */
+  transition: background-color 0.3s, color 0.3s;
   margin-left: 10px;
 }
 
@@ -366,39 +366,39 @@ footer {
 }
 
 .registration-registration-button {
-  background-color: #d9534f; 
+  background-color: #d9534f;
   color: #fff;
   padding: 8px 15px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* добавляем анимацию перехода */
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .registration-registration-button:hover {
   background-color: #c9302c;
 }
 
-/*Корзина*/
+
 
 
 .checkout-button {
-  background-color: #d9534f; 
+  background-color: #d9534f;
   color: #fff;
   padding: 8px 15px;
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* добавляем анимацию перехода */
+  transition: background-color 0.3s, color 0.3s;
 
   }
-  
+
   .checkout-button:hover {
     background-color: #c9302c;
   }
-  
 
-/*Checkout.js*/
+
+
 
 .checkout-container {
     width: 80%;
@@ -411,14 +411,14 @@ footer {
     background-color: #fff;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-  
+
   .checkout-container h1 {
     font-size: 2em;
     margin-bottom: 10px;
     color: #d9534f;
     text-align: center;
   }
-  
+
   .checkout-items {
     margin-bottom: 30px !important;
     margin-top: 40px;
@@ -426,15 +426,15 @@ footer {
     padding: 20px !important;
     border-radius: 13px !important;
   }
-  
+
   .customer-info {
     margin-bottom: 30px !important;
     border: 2px solid #000 !important;
     padding: 20px !important;
     border-radius: 13px !important;
   }
-  
-  
+
+
   .checkout-item {
     display: flex;
     align-items: center;
@@ -442,7 +442,7 @@ footer {
     padding: 10px;
     border-bottom: 1px solid #e0e0e0;
   }
-  
+
   .checkout-item-img {
     width: 80px;
     height: 80px;
@@ -450,45 +450,45 @@ footer {
     border-radius: 8px;
     margin-right: 15px;
   }
-  
+
   .checkout-item-details {
     flex-grow: 1;
   }
-  
+
   .checkout-item-details h2 {
     margin: 0;
     font-size: 1.2em;
     color: #333;
   }
-  
+
   .checkout-item-details p {
     margin: 5px 0 0;
     color: #666;
   }
-  
+
   .customer-info {
     margin-bottom: 20px;
     border-top: 1px solid #e0e0e0;
     padding-top: 20px;
   }
-  
+
   .customer-info h2 {
     font-size: 1.5em;
     color: #d9534f;
     margin-bottom: 15px;
   }
-  
+
   .form-group {
     margin-bottom: 12px;
   }
-  
+
   .form-group label {
     display: block;
     font-size: 0.9em;
     color: #666;
     margin-bottom: 3px;
   }
-  
+
   .form-group input {
     width: 100%;
     padding: 8px;
@@ -497,26 +497,26 @@ footer {
     font-size: 0.9em;
     box-sizing: border-box;
   }
-  
+
   .checkout-summary {
     text-align: right;
     border-top: 1px solid #e0e0e0;
     padding-top: 20px;
   }
-  
+
   .checkout-summary h2 {
     margin: 0 0 15px;
     font-size: 1.5em;
     color: #333;
   }
-  
+
   .checkout-confirm-button {
 
     display: inline-block;
     align-items: center;
     margin-bottom: 20px;
     padding: 10px 20px;
-    background-color: #d9534f; /* Красный цвет кнопки */
+    background-color: #d9534f;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -524,31 +524,29 @@ footer {
     transition: background-color 0.3s ease;
 
   }
-  
+
   .checkout-confirm-button:hover {
     background-color: #c9302c;
   }
-  
+
   .checkout-back-button {
     display: inline-block;
     align-items: center;
     margin-bottom: 20px;
     padding: 10px 20px;
-    background-color: #d9534f; /* Красный цвет кнопки */
+    background-color: #d9534f;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
+
   .checkout-back-button:hover {
     background-color: #c9302c;
   }
-  
-  /*новое*\
 
-  /* Стили для выбора способа оплаты */
+
 .form-group select {
   width: 100%;
   padding: 8px;
@@ -556,7 +554,7 @@ footer {
   border-radius: 5px;
   font-size: 0.9em;
   box-sizing: border-box;
-  margin-top: 5px; /* Добавляем небольшой отступ сверху */
+  margin-top: 5px;
 }
 
 
@@ -616,68 +614,68 @@ footer {
   text-align: center;
 }
 
-/* styles.css */
-/* styles.css */
-/* Стили для модального окна */
 
 
-  /* Меню пользователя */
-/* Меню пользователя */
+
+
+
+
+
 .user-profile {
   position: absolute;
   position: fixed;
   top: 44px;
   right: 0;
-  width: 200px; 
-  background: #fff; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  width: 200px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  border: 2px solid #333; 
+  border: 2px solid #333;
   overflow: hidden;
-  font-family: 'SF Pro', 'Helvetica Neue', sans-serif; 
+  font-family: 'SF Pro', 'Helvetica Neue', sans-serif;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
 }
 
 .user-profile-content {
-  padding: 0; 
+  padding: 0;
 }
 
 .user-profile h2 {
   font-size: 18px;
   color: #333;
-  margin: 15px; 
+  margin: 15px;
 }
 
 .user-profile p {
-  font-size: 16px; 
-  color: #555; 
-  margin: 10px 15px; 
+  font-size: 16px;
+  color: #555;
+  margin: 10px 15px;
 
 }
 
 .user-profile button {
   background-color: transparent;
-  border: none; 
+  border: none;
   color: #000;
   padding: 10px 15px;
-  text-align: left; 
+  text-align: left;
   text-decoration: none;
   display: block;
   font-size: 16px;
   transition: background-color 0.3s, color 0.3s;
   cursor: pointer;
-  width: calc(100% - 30px); 
-  margin: 0 15px; 
-  border-bottom: 1px solid #e0e0e0; 
+  width: calc(100% - 30px);
+  margin: 0 15px;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .user-profile button:last-child {
-  border-bottom: none; 
+  border-bottom: none;
 }
 
 .user-profile button:hover {
-  background-color: #f1f1f1; 
+  background-color: #f1f1f1;
   color: #555;
 }
 
@@ -687,7 +685,7 @@ footer {
 
 
 
-/* Стили для кнопки "Назад" в UserData */
+
 .user-data-back-button {
   padding: 8px 16px;
   border: none;
@@ -711,7 +709,7 @@ footer {
   border-color: #333;
 }
 
-/* Стили для кнопки "Назад" в OrderHistory */
+
 .order-history-back-button {
   padding: 8px 16px;
   border: none;
@@ -735,14 +733,14 @@ footer {
   border-color: #333;
 }
 
-/* Стили UserData */
+
 .user-data-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 10px;
-  border: 2px solid #aba8a8; 
+  border: 2px solid #aba8a8;
   border-radius: 15px;
-  background-color: #e9e3da; 
+  background-color: #e9e3da;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -787,14 +785,14 @@ footer {
   right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #d9534f; 
+  color: #d9534f;
 }
 
 .save-button {
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #d9534f; 
+  background-color: #d9534f;
   color: white;
   border: none;
   border-radius: 5px;
@@ -804,7 +802,7 @@ footer {
 }
 
 .save-button:hover {
-  background-color: #c9302c; 
+  background-color: #c9302c;
 }
 
 .success-message {
@@ -818,7 +816,7 @@ footer {
   align-items: center;
   margin-bottom: 20px;
   padding: 10px 20px;
-  background-color: #d9534f; /* Красный цвет кнопки */
+  background-color: #d9534f;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -827,7 +825,7 @@ footer {
 }
 
 .user-data-back-button:hover {
-  background-color: #c9302c; 
+  background-color: #c9302c;
 }
 
 .show-password {
@@ -841,8 +839,8 @@ footer {
 }
 
 
-/* OrderHistory.css */
-/* OrderHistory.css */
+
+
 .order-history-container {
   padding: 20px;
   max-width: 800px;
@@ -855,7 +853,7 @@ footer {
   align-items: center;
   margin-bottom: 20px;
   padding: 10px 20px;
-  background-color: #d9534f; /* Красный цвет кнопки */
+  background-color: #d9534f;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -864,7 +862,7 @@ footer {
 }
 
 .order-history-back-button:hover {
-  background-color: #c9302c; /* Более темный красный цвет для эффекта наведения */
+  background-color: #c9302c;
 }
 
 .order-list {
@@ -873,11 +871,11 @@ footer {
 }
 
 .order-item {
-  border: 2px solid #666666; 
+  border: 2px solid #666666;
   border-radius: 10px;
   margin-bottom: 20px;
   padding: 15px;
-  background-color: #f9f9f9; /* Фон внутри рамки */
+  background-color: #f9f9f9;
   transition: box-shadow 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -904,7 +902,7 @@ footer {
 .order-details {
   margin-top: 10px;
   padding: 10px;
-  background-color: #ececec; /* Чуть более светлый серый фон для деталей */
+  background-color: #ececec;
   border-radius: 4px;
 }
 
@@ -938,7 +936,7 @@ footer {
   align-items: center;
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #d9534f; /* Красный цвет кнопки */
+  background-color: #d9534f;
   color: white;
   border: none;
   border-radius: 4px;
@@ -947,7 +945,7 @@ footer {
 }
 
 .order-details-button:hover {
-  background-color: #c9302c; /* Более темный красный цвет для эффекта наведения */
+  background-color: #c9302c;
 }
 
 .order-details-button svg {
@@ -957,7 +955,7 @@ footer {
 
 
 
-/* src/components/AboutUs.css */
+
 .about-us {
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -974,7 +972,7 @@ footer {
 
 .about-us-header h1 {
   margin-bottom: 20px;
-  color: #d9534f; /* Красный цвет заголовка */
+  color: #d9534f;
 }
 
 .about-us h1, .about-us h2 {
@@ -991,19 +989,19 @@ footer {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  color: #d9534f; /* Красный цвет подзаголовков */
+  color: #d9534f;
 }
 
 .about-us h2 svg {
   margin-right: 10px;
-  color: #d9534f; /* Красный цвет иконок */
+  color: #d9534f;
 }
 
 .map-container {
-  width: 100%; /* Устанавливаем фиксированную ширину для карты */
+  width: 100%;
   height: 400px;
-  margin: 20px auto; /* Центрируем карту */
-  border: 1px solid #ccc; /* Добавляем рамку для визуального улучшения */
+  margin: 20px auto;
+  border: 1px solid #ccc;
   border-radius: 8px;
 }
 
@@ -1040,7 +1038,7 @@ footer {
   align-items: center;
   margin-bottom: 20px;
   padding: 10px 20px;
-  background-color: #d9534f; /* Красный цвет кнопки */
+  background-color: #d9534f;
   color: #fff;
   border: none;
   border-radius: 4px;

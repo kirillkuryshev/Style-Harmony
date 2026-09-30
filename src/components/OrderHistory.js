@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getFirestore, collection, query, where, getDocs } from 'firebase/firestore';
+import { api } from '../api';
 import { useHistory } from 'react-router-dom';
 import { FaArrowLeft, FaChevronDown, FaChevronUp, FaBoxOpen, FaTruck, FaBan } from 'react-icons/fa';
 
@@ -7,34 +7,14 @@ import { FaArrowLeft, FaChevronDown, FaChevronUp, FaBoxOpen, FaTruck, FaBan } fr
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [expandedOrderIndex, setExpandedOrderIndex] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const db = getFirestore();
-      const userLogin = localStorage.getItem('userLogin');
-
-      if (!userLogin) {
-        console.error('User is not logged in');
-        setLoading(false);
-        return;
-      }
-
-      const ordersCollection = collection(db, 'users');
-      const q = query(ordersCollection, where('__name__', '==', userLogin));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        querySnapshot.forEach((doc) => {
-          const userData = doc.data();
-          if (userData.orders) {
-            const sortedOrders = userData.orders.sort((a, b) => b.timestamp.seconds - a.timestamp.seconds);
-            setOrders(sortedOrders);
-          }
-        });
-      }
-
+      try { setOrders(await api('/orders')); }
+      catch (e) { setError(e.message); }
       setLoading(false);
     };
 
@@ -52,11 +32,13 @@ const OrderHistory = () => {
   const getStatusIcon = (status) => {
     if (!status) return <FaBoxOpen />;
     switch (status.toLowerCase()) {
-      case 'доставлен':
+      case 'delivered':
         return <FaTruck style={{ color: 'green' }} />;
-      case 'доставляется':
+      case 'shipping':
         return <FaTruck style={{ color: 'orange' }} />;
-      case 'отменен':
+      case 'created':
+        return <FaBoxOpen style={{ color: 'orange' }} />;
+      case 'cancelled':
         return <FaBan style={{ color: 'red' }} />;
       default:
         return <FaBoxOpen />;
@@ -66,45 +48,46 @@ const OrderHistory = () => {
   return (
     <div className="order-history-container">
       <button className="order-history-back-button" onClick={handleBackClick}>
-        <FaArrowLeft /> Назад
+        <FaArrowLeft /> Back
       </button>
-      <h1>История заказов</h1>
+      <h1>Order history</h1>
+      {error && <p role="alert">{error}</p>}
       {loading ? (
-        <p>Загрузка...</p>
+        <p>Loading...</p>
       ) : (
         orders.length > 0 ? (
           <ul className="order-list">
             {orders.map((order, index) => (
-              <li key={index} className="order-item">
+              <li key={order.id} className="order-item">
                 <div className="order-header">
-                  <h2>Заказ от {new Date(order.timestamp.seconds * 1000).toLocaleDateString()}</h2>
+                  <h2>Order from {new Date(order.timestamp).toLocaleDateString('en-US')}</h2>
                   <div className="order-status-icon">{getStatusIcon(order.status)}</div>
                 </div>
-                <p className="order-status">Статус: {order.status}</p>
-                <p>Сумма: {order.totalAmount} ₽</p>
+                <p className="order-status">Status: {order.status}</p>
+                <p>Total: {order.totalAmount} RUB</p>
                 <button className="order-details-button" onClick={() => handleToggleExpand(index)}>
                   {expandedOrderIndex === index ? <FaChevronUp /> : <FaChevronDown />}
-                  {expandedOrderIndex === index ? 'Скрыть детали' : 'Показать детали'}
+                  {expandedOrderIndex === index ? 'Hide details' : 'Show details'}
                 </button>
                 {expandedOrderIndex === index && (
                   <div className="order-details">
-                    <p>ФИО: {order.customerInfo.fullName}</p>
-                    <p>Телефон: {order.customerInfo.phone}</p>
-                    <p>Улица: {order.customerInfo.street}</p>
-                    <p>Дом: {order.customerInfo.house}</p>
-                    <p>Подъезд: {order.customerInfo.entrance}</p>
-                    <p>Этаж: {order.customerInfo.floor}</p>
-                    <p>Квартира: {order.customerInfo.apartment}</p>
+                    <p>Full name: {order.customerInfo.fullName}</p>
+                    <p>Phone: {order.customerInfo.phone}</p>
+                    <p>Street: {order.customerInfo.street}</p>
+                    <p>House: {order.customerInfo.house}</p>
+                    <p>Entrance: {order.customerInfo.entrance}</p>
+                    <p>Floor: {order.customerInfo.floor}</p>
+                    <p>Apartment: {order.customerInfo.apartment}</p>
                   </div>
                 )}
-                <h3>Товары:</h3>
+                <h3>Items:</h3>
                 <ul className="order-products">
                   {order.orders.map((item, itemIndex) => (
                     <li key={itemIndex} className="order-product-item">
                       <img src={`/img/${item.item.img}`} alt={item.item.title} className="product-image" />
                       <div className="product-details">
                         <p>{item.item.title}</p>
-                        <p>{item.quantity} x {item.item.price} ₽</p>
+                        <p>{item.quantity} x {item.item.price} RUB</p>
                       </div>
                     </li>
                   ))}
@@ -113,7 +96,7 @@ const OrderHistory = () => {
             ))}
           </ul>
         ) : (
-          <p>У вас нет заказов.</p>
+          <p>You have no orders yet.</p>
         )
       )}
     </div>

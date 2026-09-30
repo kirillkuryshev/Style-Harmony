@@ -1,6 +1,5 @@
 import React from "react";
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get } from 'firebase/database';
+import { api } from './api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -10,26 +9,11 @@ import Items from "./components/Items";
 import Categories from "./components/Categories";
 import ShowFullItem from "./components/ShowFullItem";
 import Checkout from "./components/Checkout";
-import UserProfile from "./components/UserProfile"; 
 import UserData from "./components/UserData";
-import OrderHistory from "./components/OrderHistory"; // Импортируем OrderHistory
-import AboutUs from './components/AboutUs'; // Импортируем AboutUs
-import './index.css'; // Импортируем стили
+import OrderHistory from "./components/OrderHistory";
+import AboutUs from './components/AboutUs';
+import './index.css';
 
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAmynFq47_lcCUXlMVOg20UNSDCTRrsaj8",
-  authDomain: "housestaffshop.firebaseapp.com",
-  databaseURL: "https://housestaffshop-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "housestaffshop",
-  storageBucket: "housestaffshop.appspot.com",
-  messagingSenderId: "914371405589",
-  appId: "1:914371405589:web:ab7921236a2de6a110eb1c",
-  measurementId: "G-RZWJXMKKE1"
-};
-
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getDatabase(firebaseApp);
 
 class App extends React.Component {
   constructor(props) {
@@ -41,8 +25,8 @@ class App extends React.Component {
       showFullItem: false,
       fullItem: {},
       showCheckout: false,
+      catalogError: '',
     };
-    localStorage.setItem('isLoggedIn', false);
 
     this.addToOrder = this.addToOrder.bind(this);
     this.deleteOrder = this.deleteOrder.bind(this);
@@ -54,23 +38,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const itemsRef = ref(db);
-    get(itemsRef).then((snapshot) => {
-      if (snapshot.exists()) {
-        const itemsData = snapshot.val();
-        const itemsArray = Object.values(itemsData);
-        this.setState({ items: itemsArray, currentItems: itemsArray });
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error("Error getting data:", error);
-    });
+    api('/products')
+      .then((items) => this.setState({ items, currentItems: items }))
+      .catch((error) => this.setState({ catalogError: error.message }));
   }
 
   handleOrderConfirmed() {
     this.setState({ orders: [], showCheckout: false });
-    toast.success('Заказ успешно оформлен!', {
+    toast.success('Order placed successfully!', {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -99,12 +74,13 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/user-data" component={UserData} />
-          <Route path="/order-history" component={OrderHistory} /> {/* Новый маршрут */}
+          <Route path="/order-history" component={OrderHistory} />
           <Route path="/about" component={AboutUs} />
           <Route path="/">
             <div className="wrapper">
               <Header orders={this.state.orders} onDelete={this.deleteOrder} onCheckout={this.onCheckout} />
               <Categories chooseCategory={this.chooseCategory} />
+              {this.state.catalogError && <p role="alert">Could not load products: {this.state.catalogError}</p>}
               <Items onShowItem={this.onShowItem} items={this.state.currentItems} onAdd={this.addToOrder} />
               {this.state.showFullItem && <ShowFullItem onAdd={this.addToOrder} onShowItem={this.onShowItem} item={this.state.fullItem} />}
               <Footer />

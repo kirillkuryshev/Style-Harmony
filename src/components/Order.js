@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTrashAlt } from 'react-icons/fa'; // Импортируем иконку удаления
+import { FaTrashAlt } from 'react-icons/fa';
 
 export default function Order(props) {
   return (
